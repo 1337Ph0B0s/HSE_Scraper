@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2e955c6a-36f1-4da9-b791-2333c7726a6b" name="Changes" comment="Scrapper HSE">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.TXT" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/source/api.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processed/hse_notities_UK.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processed/hse_notities_UK.sqlite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/debug_one_notice.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/debug_one_notice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/detail_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/detail_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/http_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/http_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/list_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/list_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/storage.py" afterDir="false" />
-    </list>
+    <list default="true" id="2e955c6a-36f1-4da9-b791-2333c7726a6b" name="Changes" comment="Scrapper HSE" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775461972222</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Scrapper HSE">
+      <option name="closed" value="true" />
+      <created>1775473246197</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1775473246198</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
