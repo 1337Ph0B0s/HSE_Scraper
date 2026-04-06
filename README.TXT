@@ -168,11 +168,8 @@ Incluye:
 -------------------------------------------------------------------------------
 10. Licencia y atribución (publicación del dataset)
 -------------------------------------------------------------------------------
-Este dataset se deriva de un registro público del Reino Unido. Al publicar en Zenodo,
-se debe:
-- Citar HSE como fuente.
-- Incluir una nota de atribución acorde a Open Government Licence (OGL) cuando aplique
-  (por ejemplo, “Contains public sector information published by the Health and Safety Executive…”).
+Contains public sector information published by the Health and Safety Executive and licensed under the Open Government
+Licence v3.0.
 
 -------------------------------------------------------------------------------
 11. Contacto / reproducibilidad

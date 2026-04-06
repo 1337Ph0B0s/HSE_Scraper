@@ -174,7 +174,7 @@ python -m src.main --all --start-page 97 --min-delay 1.2 --max-delay 2.5 \
 ## 8. Dataset y diccionario de variables
 El dataset exportado se describe en:
 
-- `data_dictionary.md`
+- `\data\metadata\data_dictionary.md`
 
 Incluye:
 - clave primaria (`notice_number`)
@@ -194,15 +194,34 @@ Incluye:
 ---
 
 ## 10. Licencia y atribución (publicación del dataset)
-El dataset se deriva de un registro público del Reino Unido. Al publicar en Zenodo:
-- Citar HSE como fuente.
-- Incluir una nota de atribución coherente con el marco de reutilización del sector público (OGL) cuando aplique (ej.: “Contains public sector information published by the Health and Safety Executive…”).
-
+Contains public sector information published by the Health and Safety Executive and licensed under the Open Government 
+Licence v3.0.
 ---
 
-## 11. Reproducibilidad (recomendado)
+## 11. Reproducibilidad 
 Guardar junto al CSV:
 - comando exacto de ejecución (CLI)
 - fecha de extracción (`scraped_at_utc`)
 - `requirements.txt`
 - `data_dictionary.md`
+
+## 12. Comando utilizado para extraer la data completa
+
+`python -m src.main --all --min-delay 1.0 --max-delay 3.0 --out data/processed/hse_notities.csv --db data/processed/hse_notities.sqlite`
+
+***Nota:*** Se pueden ajustar los parámetros `min-delay` y `max-delay` a valores menores para el caso que se necesite una
+ejecución más rápida.
+
+## 13. Data obtenida
+
+La data obtenida de la ejecución del comando listado en 12. está disponible en `\data\processed` donde se listan dos 
+archivos comprimidos que tienen data para descargar y descomprimir.
+Se opta por comprimir los resultados del output ya que GitHub tiene políticas de uso de espacio restrictivas y sugiere 
+otro formato.
+Los archivos son:
+- `hse_notices.csv.rar`
+- `hse_notices.sqlite.rar`
+
+**NOTA**: Existen dos archivos de ejemplo con data visualizable:
+- `hse_sample.csv`
+- `hse_sample.sqlite`
