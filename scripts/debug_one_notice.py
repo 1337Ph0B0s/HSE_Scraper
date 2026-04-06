@@ -1,6 +1,10 @@
 import requests
 from src.modules.detail_parser import parse_detail_page
 
+# Módulo para revisar la extracción correcta de información de todos los campos de la una notificación
+# Para el ejemplo, se usó la notificación: 315684361
+
+
 URL = "https://resources.hse.gov.uk/notices/notices/notice_details.asp?SF=CN&SV=315684361"
 HEADERS = {"User-Agent": "AcademicScraper/1.0 (+contact: you@example.com)"}
 

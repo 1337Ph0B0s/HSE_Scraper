@@ -10,13 +10,27 @@ from urllib3.util.retry import Retry
 
 @dataclass(frozen=True)
 class HttpConfig:
+    """
+    Configuración inmutable del cliente HTTP.
+
+    Agrupa parámetros básicos usados por el scraper para mantener una configuración
+    consistente y reproducible.
+
+    :param timeout: Tiempo máximo de espera (segundos) para una petición HTTP.
+    :type timeout: int
+    """
     timeout: int = 30
 
 
 def make_session() -> requests.Session:
     """
-    Session con reintentos y backoff para errores transitorios.
-    No intenta evadir bloqueos: si hay 403, se deja fallar arriba.
+    Crea una sesión HTTP (`requests.Session`) con reintentos y backoff.
+
+    La sesión resultante reutiliza conexiones (pooling) y aplica una política de reintentos
+    ante errores transitorios (por ejemplo 429 y 5xx) para mejorar la robustez del scraping.
+
+    :return: Sesión HTTP configurada con `HTTPAdapter` y `Retry`.
+    :rtype: requests.Session
     """
     session = requests.Session()
     retry = Retry(
@@ -42,6 +56,28 @@ def fetch_html(
     headers: Dict[str, str],
     timeout: int = 30,
 ) -> str:
+    """
+    Descarga una página HTML mediante HTTP GET y devuelve su contenido como texto.
+
+    Esta función centraliza la descarga de páginas del listado y del detalle, usando una
+    `requests.Session` reutilizable. No intenta evadir bloqueos: si el servidor responde
+    con 403 se aborta la ejecución con un error.
+
+    Args:
+        session: Sesión HTTP (`requests.Session`) reutilizable.
+        url: URL absoluta a descargar.
+        headers: Cabeceras HTTP (debe incluir un User-Agent identificable).
+        timeout: Tiempo máximo de espera en segundos.
+
+    Returns:
+        El HTML de la página descargada.
+
+    Raises:
+        RuntimeError: Si el servidor devuelve 403 (Forbidden).
+        requests.HTTPError: Si hay un código HTTP no exitoso (tras reintentos, si aplican).
+        requests.RequestException: Para errores de red (timeouts, conexión, etc.).
+    """
+
     r = session.get(url, headers=headers, timeout=timeout)
 
     # Si el sitio bloquea (403), NO se debe intentar “saltarlo”.

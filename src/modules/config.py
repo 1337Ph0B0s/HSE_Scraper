@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+# Lista de configuraciones pertinentes para la extracción de información.
+# Se puede configurar los delays por defecto
+# También se pueden enviar como parámetros en la ejecución.
+# Revisar documento USAGE para más información.
+
 LIST_URL = (
     "https://resources.hse.gov.uk/notices/notices/notice_list.asp"
     "?PN=1&ST=N&rdoNType=&NT=&SN=F&EO=LIKE&SF=RN&SV=&SO=DNIS"

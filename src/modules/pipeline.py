@@ -18,6 +18,20 @@ from src.modules.storage import SQLiteStore
 
 @dataclass
 class NoticeRecord:
+    """
+    Representa una fila del dataset final de HSE Enforcement Notices.
+
+    Se construye combinando:
+
+    - Campos del LISTADO (notice_list.asp): resumen por fila.
+    - Campos del DETALLE (notice_details.asp): información ampliada.
+
+    Convenciones:
+
+    - Campos con sufijo `_summary` provienen del listado.
+    - Los demás campos provienen del detalle (o se completan con fallback).
+    - Un campo puede ser `None` si la celda del sitio está vacía.
+    """
     notice_number: str
     detail_url: str
 
@@ -52,10 +66,74 @@ class NoticeRecord:
 
 
 def _polite_sleep(min_delay: float, max_delay: float) -> None:
+
+    """
+    Aplica una pausa aleatoria (jitter) entre peticiones para realizar scraping responsable.
+
+    La función introduce un retardo uniforme aleatorio en el intervalo [min_delay, max_delay]
+    antes de continuar con la siguiente petición (por ejemplo, entre páginas del listado o
+    entre páginas de detalle). Este patrón reduce el riesgo de sobrecargar el servidor y
+    evita un ritmo de acceso determinista típico de bots.
+
+    Parameters
+    ----------
+    min_delay : float
+        Tiempo mínimo de espera (en segundos).
+    max_delay : float
+        Tiempo máximo de espera (en segundos). Debe ser >= min_delay.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    - El retardo se aplica tanto a peticiones del listado como del detalle (según la implementación
+      del pipeline).
+    - Un intervalo demasiado bajo puede aumentar el riesgo de bloqueos o errores HTTP (p.ej. 429/403).
+    - Un intervalo demasiado alto incrementa el tiempo total de ejecución; por ello se recomienda
+      ajustar estos parámetros desde la línea de comandos en función del tamaño del scraping.
+    """
     time.sleep(random.uniform(min_delay, max_delay))
 
 
 def _build_list_page_url(base_url: str, page: int) -> str:
+
+    """
+    Construye la URL de una página del listado modificando únicamente el parámetro `PN`.
+
+    El listado de HSE se pagina mediante el parámetro de query `PN` (Page Number).
+    Esta función toma una URL base (que ya contiene el resto de parámetros de filtrado/orden)
+    y devuelve una nueva URL equivalente pero con `PN=<page>`.
+
+    Esto permite iterar sobre el listado de forma determinista (PN=1..N) sin alterar
+    el resto de parámetros (ST, SN, EO, SF, SV, SO, etc.), garantizando que el scraping
+    recorre exactamente el mismo conjunto y orden de resultados.
+
+    Parameters
+    ----------
+    base_url : str
+        URL base del listado (incluye querystring). Ejemplo:
+        `...notice_list.asp?PN=1&ST=N&SN=F&EO=LIKE&SF=RN&SV=&SO=DNIS`
+    page : int
+        Número de página a construir (>= 1).
+
+    Returns
+    -------
+    str
+        URL completa del listado con el parámetro `PN` actualizado al valor indicado.
+
+    Raises
+    ------
+    ValueError
+        Si `page` es menor que 1 (recomendado validar antes de llamar).
+
+    Notes
+    -----
+    - Se preservan todos los parámetros existentes en la URL, y solo se modifica `PN`.
+    - La implementación usa `urllib.parse` para evitar errores al manipular strings a mano.
+    """
+
     parts = urlsplit(base_url)
     qs = parse_qs(parts.query)
     qs["PN"] = [str(page)]
@@ -75,12 +153,34 @@ def run(
     commit_every: int = 25,
 ) -> int:
     """
-    Orquesta:
-    - detecta total de páginas
-    - itera listado PN=start..end
-    - entra al detalle por notice
-    - guarda en SQLite (reanudable)
-    - exporta CSV al final
+    Ejecuta el pipeline completo: listado → detalle → SQLite → exportación CSV.
+
+    Pasos principales:
+
+    1. Descarga la primera página del listado y calcula el total con `parse_total_pages()`.
+    2. Itera por páginas del listado (`PN`) para extraer items semilla con `parse_list_page()`.
+    3. Visita cada página de detalle y extrae campos con `parse_detail_page()`.
+    4. Guarda incrementalmente en SQLite (reanudable) y exporta CSV al finalizar.
+
+    Scraping responsable:
+
+    - Aplica pausas aleatorias entre peticiones (`min_delay`, `max_delay`).
+    - Usa User-Agent identificable (uso académico).
+    - Registra errores por URL en la tabla `errors` sin detener el proceso.
+
+    Args:
+        db_path: Ruta del archivo SQLite (checkpoint).
+        out_csv: Ruta del CSV final.
+        user_agent: Valor del User-Agent.
+        min_delay: Pausa mínima entre peticiones (segundos).
+        max_delay: Pausa máxima entre peticiones (segundos).
+        start_page: Página inicial para comenzar o reanudar.
+        pages: Número de páginas si no se usa `scrape_all`.
+        scrape_all: Si True, procesa hasta la última página.
+        commit_every: Commit a SQLite cada N registros.
+
+    Returns:
+        Número de filas exportadas al CSV.
     """
     headers = dict(DEFAULT_HEADERS)
     headers["User-Agent"] = user_agent

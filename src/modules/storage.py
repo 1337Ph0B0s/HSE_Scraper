@@ -10,10 +10,48 @@ import pandas as pd
 
 class SQLiteStore:
     """
-    Checkpoint/reanudación:
-    - guarda cada notice_number como PK
-    - almacena JSON del registro completo
-    - permite export a CSV al final (o cuando se requiera)
+    Almacenamiento incremental (checkpoint) basado en SQLite para reanudación del scraping.
+
+    Objetivo
+    --------
+    Persistir cada registro del dataset (1 notice = 1 fila) a medida que se extrae, de forma que:
+    - El scraping sea reanudable (si se interrumpe con Ctrl+C o por un error).
+    - Se eviten duplicados (clave primaria `notice_number`).
+    - Se puedan exportar resultados parciales o finales a CSV de forma reproducible.
+
+    Diseño
+    ------
+    - Tabla principal: `notices`
+        - `notice_number` (TEXT, PRIMARY KEY): identificador único del registro.
+        - `data_json` (TEXT): serialización JSON del `NoticeRecord` (toda la fila).
+    - Tabla auxiliar: `errors`
+        - Registra fallos en URLs individuales (por ejemplo, detalle con HTML inesperado),
+          sin detener el pipeline completo.
+
+    Justificación
+    -------------
+    - SQLite es liviano, local y no requiere servicios externos.
+    - Guardar en JSON permite flexibilidad: si el modelo crece (nuevas columnas), no es necesario
+      alterar el esquema con frecuencia.
+    - Facilita auditoría y trazabilidad: se conserva la fila completa junto con el `detail_url`
+      y `scraped_at_utc`.
+
+    Consideraciones de calidad
+    --------------------------
+    - El pipeline debe hacer `commit()` periódicamente (p. ej., cada N registros) para minimizar
+      pérdida de progreso ante interrupciones.
+    - La exportación a CSV se realiza a partir de `notices`, ordenada por `notice_number`.
+
+    Parameters
+    ----------
+    db_path : str
+        Ruta del archivo SQLite. Si no existe, se crea automáticamente.
+
+    Notes
+    -----
+    - Este store no “descarga datos”; solo gestiona persistencia y exportación.
+    - La política de “no re-scrapear” se implementa en el pipeline mediante `has_notice()`.
+      Si se desea forzar re-scraping, debe añadirse un flag `--force` a nivel de pipeline/CLI.
     """
 
     def __init__(self, db_path: str):
