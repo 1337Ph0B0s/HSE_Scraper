@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; documentación de Práctica 1 (M2.851 Tipología y ciclo de vida de los datos) — Web Scraping + Dataset (HSE Notices) - 1.0.2026-04-06</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5acae899"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Práctica 1 (M2.851 Tipología y ciclo de vida de los datos) — Web Scraping + Dataset (HSE Notices) documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Práctica 1 (M2.851 Tipología y ciclo de vida de los datos) — Web Scraping + Dataset (HSE Notices)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.main">main</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.modules.config">modules.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.modules.http_client">modules.http_client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.http_client.HttpConfig"><code class="docutils literal notranslate"><span class="pre">HttpConfig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.http_client.fetch_html"><code class="docutils literal notranslate"><span class="pre">fetch_html()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.http_client.make_session"><code class="docutils literal notranslate"><span class="pre">make_session()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.modules.list_parser">modules.list_parser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.list_parser.ListItem"><code class="docutils literal notranslate"><span class="pre">ListItem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.notice_number"><code class="docutils literal notranslate"><span class="pre">ListItem.notice_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.detail_url"><code class="docutils literal notranslate"><span class="pre">ListItem.detail_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.recipient"><code class="docutils literal notranslate"><span class="pre">ListItem.recipient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.notice_type"><code class="docutils literal notranslate"><span class="pre">ListItem.notice_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.issue_date"><code class="docutils literal notranslate"><span class="pre">ListItem.issue_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.local_authority"><code class="docutils literal notranslate"><span class="pre">ListItem.local_authority</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.modules.list_parser.ListItem.main_activity"><code class="docutils literal notranslate"><span class="pre">ListItem.main_activity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.list_parser.parse_list_page"><code class="docutils literal notranslate"><span class="pre">parse_list_page()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.list_parser.parse_total_pages"><code class="docutils literal notranslate"><span class="pre">parse_total_pages()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.modules.detail_parser">modules.detail_parser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.detail_parser.parse_detail_page"><code class="docutils literal notranslate"><span class="pre">parse_detail_page()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.modules.storage">modules.storage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.storage.SQLiteStore"><code class="docutils literal notranslate"><span class="pre">SQLiteStore</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.modules.pipeline">modules.pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.pipeline.NoticeRecord"><code class="docutils literal notranslate"><span class="pre">NoticeRecord</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.modules.pipeline.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Práctica 1 (M2.851 Tipología y ciclo de vida de los datos) — Web Scraping + Dataset (HSE Notices)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="module-src.main">
+<span id="main"></span><h2>main<a class="headerlink" href="#module-src.main" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.main.main">
+<span class="sig-prename descclassname"><span class="pre">src.main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.main.main" title="Link to this definition"></a></dt>
+<dd><p>Punto de entrada principal del programa (CLI).</p>
+<p>Flujo:</p>
+<ol class="arabic simple">
+<li><p>Leer la configuración desde la línea de comandos con <cite>parse_args()</cite>.</p></li>
+<li><p>Validar coherencia básica de parámetros (por ejemplo, <cite>max_delay &gt;= min_delay</cite>).</p></li>
+<li><p>Ejecutar el pipeline <cite>run()</cite> (listado → detalle), persistiendo en SQLite y exportando CSV.</p></li>
+</ol>
+<p>Notas:</p>
+<ul class="simple">
+<li><p><cite>main()</cite> no implementa la lógica de scraping; delega en <cite>src.modules.pipeline</cite>.</p></li>
+<li><p>La configuración se controla desde el CLI para facilitar reproducibilidad.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.modules.config">
+<span id="modules-config"></span><h2>modules.config<a class="headerlink" href="#module-src.modules.config" title="Link to this heading"></a></h2>
+</section>
+<section id="module-src.modules.http_client">
+<span id="modules-http-client"></span><h2>modules.http_client<a class="headerlink" href="#module-src.modules.http_client" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.modules.http_client.HttpConfig">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.modules.http_client.</span></span><span class="sig-name descname"><span class="pre">HttpConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.http_client.HttpConfig" title="Link to this definition"></a></dt>
+<dd><p>Configuración inmutable del cliente HTTP.</p>
+<p>Agrupa parámetros básicos usados por el scraper para mantener una configuración
+consistente y reproducible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Tiempo máximo de espera (segundos) para una petición HTTP.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.modules.http_client.fetch_html">
+<span class="sig-prename descclassname"><span class="pre">src.modules.http_client.</span></span><span class="sig-name descname"><span class="pre">fetch_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.http_client.fetch_html" title="Link to this definition"></a></dt>
+<dd><p>Descarga una página HTML mediante HTTP GET y devuelve su contenido como texto.</p>
+<p>Esta función centraliza la descarga de páginas del listado y del detalle, usando una
+<cite>requests.Session</cite> reutilizable. No intenta evadir bloqueos: si el servidor responde
+con 403 se aborta la ejecución con un error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code></span>) – Sesión HTTP (<cite>requests.Session</cite>) reutilizable.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – URL absoluta a descargar.</p></li>
+<li><p><strong>headers</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Cabeceras HTTP (debe incluir un User-Agent identificable).</p></li>
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Tiempo máximo de espera en segundos.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>El HTML de la página descargada.</p>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – Si el servidor devuelve 403 (Forbidden).</p></li>
+<li><p><strong>requests.HTTPError</strong> – Si hay un código HTTP no exitoso (tras reintentos, si aplican).</p></li>
+<li><p><strong>requests.RequestException</strong> – Para errores de red (timeouts, conexión, etc.).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.modules.http_client.make_session">
+<span class="sig-prename descclassname"><span class="pre">src.modules.http_client.</span></span><span class="sig-name descname"><span class="pre">make_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.http_client.make_session" title="Link to this definition"></a></dt>
+<dd><p>Crea una sesión HTTP (<cite>requests.Session</cite>) con reintentos y backoff.</p>
+<p>La sesión resultante reutiliza conexiones (pooling) y aplica una política de reintentos
+ante errores transitorios (por ejemplo 429 y 5xx) para mejorar la robustez del scraping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sesión HTTP configurada con <cite>HTTPAdapter</cite> y <cite>Retry</cite>.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.modules.list_parser">
+<span id="modules-list-parser"></span><h2>modules.list_parser<a class="headerlink" href="#module-src.modules.list_parser" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.modules.list_parser.</span></span><span class="sig-name descname"><span class="pre">ListItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notice_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notice_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">issue_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_authority</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_activity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.list_parser.ListItem" title="Link to this definition"></a></dt>
+<dd><p>Representa un registro “semilla” extraído desde una página del listado de HSE.</p>
+<p><cite>ListItem</cite> corresponde a una fila del listado (notice_list.asp) y contiene:
+- el identificador del notice (<cite>notice_number</cite>)
+- la URL absoluta a la ficha de detalle (<cite>detail_url</cite>)
+- campos resumen mostrados en la tabla del listado (recipient, notice_type, issue_date, etc.)</p>
+<p>Este objeto NO es la fila final del dataset. Su propósito es:
+1) Proveer la lista de notices a procesar.
+2) Aportar campos resumen que se integrarán con los del detalle para construir <cite>NoticeRecord</cite>.</p>
+<p>En el pipeline:
+- <cite>parse_list_page()</cite> devuelve una lista de <cite>ListItem</cite>.
+- Por cada <cite>ListItem</cite>, se visita <cite>detail_url</cite> y se completa el resto de variables.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.notice_number">
+<span class="sig-name descname"><span class="pre">notice_number</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.notice_number" title="Link to this definition"></a></dt>
+<dd><p>Identificador único del notice (clave primaria del dataset).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.detail_url">
+<span class="sig-name descname"><span class="pre">detail_url</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.detail_url" title="Link to this definition"></a></dt>
+<dd><p>URL absoluta a la página de detalle (<cite>notice_details.asp</cite>).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.recipient" title="Link to this definition"></a></dt>
+<dd><p>Nombre del receptor (empresa/entidad) según el listado.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.notice_type">
+<span class="sig-name descname"><span class="pre">notice_type</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.notice_type" title="Link to this definition"></a></dt>
+<dd><p>Tipo de notice según el listado (resumen).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.issue_date">
+<span class="sig-name descname"><span class="pre">issue_date</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.issue_date" title="Link to this definition"></a></dt>
+<dd><p>Fecha de emisión según el listado (formato DD/MM/YYYY).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.local_authority">
+<span class="sig-name descname"><span class="pre">local_authority</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.local_authority" title="Link to this definition"></a></dt>
+<dd><p>Autoridad local según el listado.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.modules.list_parser.ListItem.main_activity">
+<span class="sig-name descname"><span class="pre">main_activity</span></span><a class="headerlink" href="#src.modules.list_parser.ListItem.main_activity" title="Link to this definition"></a></dt>
+<dd><p>Actividad principal (puede incluir “código - etiqueta”) según el listado.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.modules.list_parser.parse_list_page">
+<span class="sig-prename descclassname"><span class="pre">src.modules.list_parser.</span></span><span class="sig-name descname"><span class="pre">parse_list_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.list_parser.parse_list_page" title="Link to this definition"></a></dt>
+<dd><p>Parsea una página del listado de notices y extrae los registros visibles (10 por página, aprox.).</p>
+<p>Esta función recibe el HTML de una página de listado (<cite>notice_list.asp?PN=X…</cite>),
+localiza la tabla principal de resultados (mediante <cite>_find_results_table</cite>) y, para
+cada fila válida, extrae:</p>
+<ul class="simple">
+<li><p><cite>notice_number</cite> (identificador de la notice)</p></li>
+<li><p><cite>detail_url</cite> (URL absoluta a la ficha de detalle <cite>notice_details.asp</cite>)</p></li>
+<li><p>columnas resumen del listado: <cite>recipient</cite>, <cite>notice_type</cite>, <cite>issue_date</cite>,
+<cite>local_authority</cite>, <cite>main_activity</cite></p></li>
+</ul>
+<p>El objetivo es construir una colección de items «semilla» que luego serán enriquecidos
+en la fase de scraping del detalle (página individual) para completar el dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>html</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – HTML crudo de la página de listado.</p></li>
+<li><p><strong>page_url</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – URL de la página actual del listado. Se usa como base para convertir enlaces
+relativos a detalle en URLs absolutas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lista de elementos (uno por notice encontrada) con el identificador y la URL de detalle
+más los campos resumen del listado.</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="#src.modules.list_parser.ListItem" title="src.modules.list_parser.ListItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListItem</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si no se encuentra la tabla de resultados esperada o si la estructura HTML no coincide
+    con el patrón previsto.</p>
+</dd>
+</dl>
+<p class="rubric">Notas</p>
+<ul class="simple">
+<li><p>La función ignora filas que no contienen un enlace a <cite>notice_details.asp</cite> (cabeceras u otras tablas).</p></li>
+<li><p>Si el sitio cambia el número/orden de columnas, se deberá ajustar el mapeo de índices <cite>tds[i]</cite>.</p></li>
+<li><p><cite>notice_number</cite> se normaliza eliminando espacios para mantener consistencia de claves.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.modules.list_parser.parse_total_pages">
+<span class="sig-prename descclassname"><span class="pre">src.modules.list_parser.</span></span><span class="sig-name descname"><span class="pre">parse_total_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.list_parser.parse_total_pages" title="Link to this definition"></a></dt>
+<dd><p>Extrae el número total de páginas del listado.</p>
+<p>El listado incluye un texto de estado del estilo: <code class="docutils literal notranslate"><span class="pre">Showing</span> <span class="pre">Page</span> <span class="pre">1</span> <span class="pre">of</span> <span class="pre">3055</span></code>.
+Esta función busca ese patrón y devuelve el total de páginas (por ejemplo, 3055).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>html</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – HTML completo de la página del listado.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span></p>
+</dd>
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Número total de páginas detectado.</p>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si no se encuentra el patrón esperado.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.modules.detail_parser">
+<span id="modules-detail-parser"></span><h2>modules.detail_parser<a class="headerlink" href="#module-src.modules.detail_parser" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.modules.detail_parser.parse_detail_page">
+<span class="sig-prename descclassname"><span class="pre">src.modules.detail_parser.</span></span><span class="sig-name descname"><span class="pre">parse_detail_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.detail_parser.parse_detail_page" title="Link to this definition"></a></dt>
+<dd><p>Parsea una página de detalle de HSE (notice_details.asp) y extrae campos del dataset.</p>
+<p>La extracción se basa en tablas HTML con patrón «label → valor», donde el label está en la
+celda izquierda y el valor en la celda derecha. En particular, <cite>description</cite> y <cite>address</cite>
+se obtienen como el contenido completo de la celda derecha.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>html</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – HTML crudo de la página de detalle.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Diccionario con los campos extraídos (strings) o <cite>None</cite> si la celda está vacía.</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span></p>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si no se detectan estructuras mínimas esperadas (tablas/labels).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.modules.storage">
+<span id="modules-storage"></span><h2>modules.storage<a class="headerlink" href="#module-src.modules.storage" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.modules.storage.SQLiteStore">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.modules.storage.</span></span><span class="sig-name descname"><span class="pre">SQLiteStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.storage.SQLiteStore" title="Link to this definition"></a></dt>
+<dd><p>Almacenamiento incremental (checkpoint) basado en SQLite para reanudación del scraping.</p>
+<section id="objetivo">
+<h3>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading"></a></h3>
+<p>Persistir cada registro del dataset (1 notice = 1 fila) a medida que se extrae, de forma que:
+- El scraping sea reanudable (si se interrumpe con Ctrl+C o por un error).
+- Se eviten duplicados (clave primaria <cite>notice_number</cite>).
+- Se puedan exportar resultados parciales o finales a CSV de forma reproducible.</p>
+</section>
+<section id="diseno">
+<h3>Diseño<a class="headerlink" href="#diseno" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Tabla principal: <cite>notices</cite></dt><dd><ul>
+<li><p><cite>notice_number</cite> (TEXT, PRIMARY KEY): identificador único del registro.</p></li>
+<li><p><cite>data_json</cite> (TEXT): serialización JSON del <cite>NoticeRecord</cite> (toda la fila).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Tabla auxiliar: <cite>errors</cite></dt><dd><ul>
+<li><p>Registra fallos en URLs individuales (por ejemplo, detalle con HTML inesperado),
+sin detener el pipeline completo.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="justificacion">
+<h3>Justificación<a class="headerlink" href="#justificacion" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>SQLite es liviano, local y no requiere servicios externos.</p></li>
+<li><p>Guardar en JSON permite flexibilidad: si el modelo crece (nuevas columnas), no es necesario
+alterar el esquema con frecuencia.</p></li>
+<li><p>Facilita auditoría y trazabilidad: se conserva la fila completa junto con el <cite>detail_url</cite>
+y <cite>scraped_at_utc</cite>.</p></li>
+</ul>
+</section>
+<section id="consideraciones-de-calidad">
+<h3>Consideraciones de calidad<a class="headerlink" href="#consideraciones-de-calidad" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>El pipeline debe hacer <cite>commit()</cite> periódicamente (p. ej., cada N registros) para minimizar
+pérdida de progreso ante interrupciones.</p></li>
+<li><p>La exportación a CSV se realiza a partir de <cite>notices</cite>, ordenada por <cite>notice_number</cite>.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">param db_path<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ruta del archivo SQLite. Si no existe, se crea automáticamente.</p>
+</dd>
+<dt class="field-even">type db_path<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+</dl>
+<p class="rubric">Notas</p>
+<ul class="simple">
+<li><p>Este store no “descarga datos”; solo gestiona persistencia y exportación.</p></li>
+<li><p>La política de “no re-scrapear” se implementa en el pipeline mediante <cite>has_notice()</cite>.
+Si se desea forzar re-scraping, debe añadirse un flag <cite>–force</cite> a nivel de pipeline/CLI.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-src.modules.pipeline">
+<span id="modules-pipeline"></span><h2>modules.pipeline<a class="headerlink" href="#module-src.modules.pipeline" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.modules.pipeline.NoticeRecord">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.modules.pipeline.</span></span><span class="sig-name descname"><span class="pre">NoticeRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notice_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_name_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notice_type_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">issue_date_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_authority_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_activity_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">served_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notice_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compliance_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revised_compliance_date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_authority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">industry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_activity_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_activity_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hse_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hse_directorate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hse_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hse_division</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scraped_at_utc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.pipeline.NoticeRecord" title="Link to this definition"></a></dt>
+<dd><p>Representa una fila del dataset final de HSE Enforcement Notices.</p>
+<p>Se construye combinando:</p>
+<ul class="simple">
+<li><p>Campos del LISTADO (notice_list.asp): resumen por fila.</p></li>
+<li><p>Campos del DETALLE (notice_details.asp): información ampliada.</p></li>
+</ul>
+<p>Convenciones:</p>
+<ul class="simple">
+<li><p>Campos con sufijo <cite>_summary</cite> provienen del listado.</p></li>
+<li><p>Los demás campos provienen del detalle (o se completan con fallback).</p></li>
+<li><p>Un campo puede ser <cite>None</cite> si la celda del sitio está vacía.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.modules.pipeline.run">
+<span class="sig-prename descclassname"><span class="pre">src.modules.pipeline.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scrape_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit_every</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.modules.pipeline.run" title="Link to this definition"></a></dt>
+<dd><p>Ejecuta el pipeline completo: listado → detalle → SQLite → exportación CSV.</p>
+<p>Pasos principales:</p>
+<ol class="arabic simple">
+<li><p>Descarga la primera página del listado y calcula el total con <cite>parse_total_pages()</cite>.</p></li>
+<li><p>Itera por páginas del listado (<cite>PN</cite>) para extraer items semilla con <cite>parse_list_page()</cite>.</p></li>
+<li><p>Visita cada página de detalle y extrae campos con <cite>parse_detail_page()</cite>.</p></li>
+<li><p>Guarda incrementalmente en SQLite (reanudable) y exporta CSV al finalizar.</p></li>
+</ol>
+<p>Scraping responsable:</p>
+<ul class="simple">
+<li><p>Aplica pausas aleatorias entre peticiones (<cite>min_delay</cite>, <cite>max_delay</cite>).</p></li>
+<li><p>Usa User-Agent identificable (uso académico).</p></li>
+<li><p>Registra errores por URL en la tabla <cite>errors</cite> sin detener el proceso.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Ruta del archivo SQLite (checkpoint).</p></li>
+<li><p><strong>out_csv</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Ruta del CSV final.</p></li>
+<li><p><strong>user_agent</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Valor del User-Agent.</p></li>
+<li><p><strong>min_delay</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Pausa mínima entre peticiones (segundos).</p></li>
+<li><p><strong>max_delay</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Pausa máxima entre peticiones (segundos).</p></li>
+<li><p><strong>start_page</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Página inicial para comenzar o reanudar.</p></li>
+<li><p><strong>pages</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – Número de páginas si no se usa <cite>scrape_all</cite>.</p></li>
+<li><p><strong>scrape_all</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Si True, procesa hasta la última página.</p></li>
+<li><p><strong>commit_every</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Commit a SQLite cada N registros.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span></p>
+</dd>
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Número de filas exportadas al CSV.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="index.html" class="btn btn-neutral float-left" title="Práctica 1 (M2.851 Tipología y ciclo de vida de los datos) — Web Scraping + Dataset (HSE Notices) documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2026, Pablo Pazmiño Naranjo [1337Ph0B0s] &amp; Sergio Alcudia Díaz [Alcu-D-IA].</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
