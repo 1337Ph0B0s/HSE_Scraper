@@ -13,7 +13,7 @@ class SQLiteStore:
     Checkpoint/reanudación:
     - guarda cada notice_number como PK
     - almacena JSON del registro completo
-    - permite export a CSV al final (o cuando quieras)
+    - permite export a CSV al final (o cuando se requiera)
     """
 
     def __init__(self, db_path: str):

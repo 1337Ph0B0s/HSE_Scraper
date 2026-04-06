@@ -6,7 +6,7 @@ LIST_URL = (
 )
 
 DEFAULT_USER_AGENT = (
-    "AcademicScraper/1.0 (+contact: pdpazmino@uoc.edu) "
+    "AcademicScraper/1.0 (+contact: info@uoc.edu) "
     "Purpose: academic research (UOC Practice 1) - respectful rate limiting"
 )
 
