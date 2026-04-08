@@ -1,5 +1,5 @@
 import requests
-from src.modules.detail_parser import parse_detail_page
+from source.modules.detail_parser import parse_detail_page
 
 # Módulo para revisar la extracción correcta de información de todos los campos de la una notificación
 # Para el ejemplo, se usó la notificación: 315684361

@@ -1,4 +1,4 @@
-from src.modules.list_parser import parse_total_pages, parse_list_page
+from source.modules.list_parser import parse_total_pages, parse_list_page
 
 
 def test_parse_total_pages():

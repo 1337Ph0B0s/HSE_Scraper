@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import argparse
 
-from src.modules.config import DEFAULT_MAX_DELAY, DEFAULT_MIN_DELAY, DEFAULT_USER_AGENT
-from src.modules.pipeline import run
+from source.modules.config import DEFAULT_MAX_DELAY, DEFAULT_MIN_DELAY, DEFAULT_USER_AGENT
+from source.modules.pipeline import run
 
 
 def parse_args() -> argparse.Namespace:
@@ -104,7 +104,7 @@ def main() -> None:
 
     Notas:
 
-    - `main()` no implementa la lógica de scraping; delega en `src.modules.pipeline`.
+    - `main()` no implementa la lógica de scraping; delega en `source.modules.pipeline`.
     - La configuración se controla desde el CLI para facilitar reproducibilidad.
     """
     args = parse_args()

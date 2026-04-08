@@ -10,11 +10,11 @@ from urllib.parse import urlsplit, parse_qs, urlencode, urlunsplit
 import requests
 from tqdm import tqdm
 
-from src.modules.config import LIST_URL, DEFAULT_HEADERS, DEFAULT_TIMEOUT
-from src.modules.http_client import fetch_html, make_session
-from src.modules.list_parser import parse_list_page, parse_total_pages
-from src.modules.detail_parser import parse_detail_page
-from src.modules.storage import SQLiteStore
+from source.modules.config import LIST_URL, DEFAULT_HEADERS, DEFAULT_TIMEOUT
+from source.modules.http_client import fetch_html, make_session
+from source.modules.list_parser import parse_list_page, parse_total_pages
+from source.modules.detail_parser import parse_detail_page
+from source.modules.storage import SQLiteStore
 
 @dataclass
 class NoticeRecord:

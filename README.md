@@ -99,7 +99,7 @@ pip install -r requirements.txt
 Ejecuta el proyecto con:
 
 ```bash
-python -m src.main [opciones]
+python -m source.main [opciones]
 ```
 
 ### Opciones disponibles
@@ -115,20 +115,20 @@ python -m src.main [opciones]
 
 ### Ejemplo 1 — Prueba rápida (3 páginas ≈ 30 registros)
 ```bash
-python -m src.main --pages 3 \
+python -m source.main --pages 3 \
   --out data/processed/hse_sample.csv \
   --db  data/processed/hse_sample.sqlite
 ```
 
 ### Ejemplo 2 — Ajustar velocidad (más rápido)
 ```bash
-python -m src.main --pages 10 --min-delay 0.8 --max-delay 1.6 \
+python -m source.main --pages 10 --min-delay 0.8 --max-delay 1.6 \
   --out data/processed/hse_10p.csv --db data/processed/hse_10p.sqlite
 ```
 
 ### Ejemplo 3 — Scraping completo (hasta última página)
 ```bash
-python -m src.main --all --min-delay 1.2 --max-delay 2.5 \
+python -m source.main --all --min-delay 1.2 --max-delay 2.5 \
   --out data/processed/hse_full.csv --db data/processed/hse_full.sqlite
 ```
 
@@ -165,7 +165,7 @@ python -c "import sqlite3; con=sqlite3.connect('data/processed/hse_sample.sqlite
 Si el proceso se cortó en PN=96, puedes continuar desde 97:
 
 ```bash
-python -m src.main --all --start-page 97 --min-delay 1.2 --max-delay 2.5 \
+python -m source.main --all --start-page 97 --min-delay 1.2 --max-delay 2.5 \
   --out data/processed/hse_full.csv --db data/processed/hse_full.sqlite
 ```
 

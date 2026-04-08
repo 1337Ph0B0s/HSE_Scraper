@@ -1,4 +1,4 @@
-from src.modules.detail_parser import parse_detail_page
+from source.modules.detail_parser import parse_detail_page
 
 
 def test_parse_detail_page_basic_fields():
