@@ -54,20 +54,20 @@ data/
 ```
 
 ### Responsabilidad de módulos
-- `src/main.py`  
+- `source/main.py`  
   Punto de entrada CLI (parsea argumentos, valida y llama al pipeline).
 
-- `src/modules/pipeline.py`  
+- `source/modules/pipeline.py`  
   Orquestador del scraping (listado → detalle), persistencia incremental y export CSV.
 
-- `src/modules/storage.py`  
+- `source/modules/storage.py`  
   `SQLiteStore` para checkpoint/reanudación y exportación.
 
-- `src/modules/detail_parser.py`  
+- `source/modules/detail_parser.py`  
   Parser del detalle **basado en tablas HTML** (celda izquierda = label, derecha = valor).  
   **Importante:** `description` y `address` se extraen como **bloques completos** de la celda derecha.
 
-- `src/modules/list_parser.py`  
+- `source/modules/list_parser.py`  
   Parser del listado y cálculo del total de páginas.
 
 ---
@@ -207,7 +207,7 @@ Guardar junto al CSV:
 
 ## 12. Comando utilizado para extraer la data completa
 
-`python -m src.main --all --min-delay 1.0 --max-delay 3.0 --out data/processed/hse_notities.csv --db data/processed/hse_notities.sqlite`
+`python -m source.main --all --min-delay 1.0 --max-delay 3.0 --out data/processed/hse_notities.csv --db data/processed/hse_notities.sqlite`
 
 ***Nota:*** Se pueden ajustar los parámetros `min-delay` y `max-delay` a valores menores para el caso que se necesite una
 ejecución más rápida.
