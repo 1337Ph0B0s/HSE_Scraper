@@ -30,7 +30,7 @@ notice_details.asp?... (con campos completos del notice)
 -------------------------------------------------------------------------------
 Estructura recomendada (Opción 1: estilo PEC/UOC):
 
-src/
+source/
   main.py
   __init__.py
   modules/
@@ -51,15 +51,15 @@ data/
     (CSV y SQLite generados)
 
 Archivos clave:
-- src/main.py:
+- source/main.py:
     Punto de entrada CLI (parsea argumentos, valida y llama al pipeline).
-- src/modules/pipeline.py:
+- source/modules/pipeline.py:
     Orquestador del scraping (listado -> detalle), persistencia incremental y export CSV.
-- src/modules/storage.py:
+- source/modules/storage.py:
     SQLiteStore para checkpoint/reanudación y exportación.
-- src/modules/detail_parser.py:
+- source/modules/detail_parser.py:
     Parser del detalle basado en tablas HTML (celda izquierda=label, derecha=valor).
-- src/modules/list_parser.py:
+- source/modules/list_parser.py:
     Parser del listado y cálculo del total de páginas.
 
 -------------------------------------------------------------------------------
@@ -97,16 +97,16 @@ Opciones disponibles:
 --commit-every  Commit a SQLite cada N registros.
 
 Ejemplo 1 — Prueba rápida (3 páginas ≈ 30 registros):
-  python -m src.main --pages 3 ^
+  python -m source.main --pages 3 ^
     --out data/processed/hse_sample.csv ^
     --db  data/processed/hse_sample.sqlite
 
 Ejemplo 2 — Ajustar velocidad (más rápido):
-  python -m src.main --pages 10 --min-delay 0.8 --max-delay 1.6 ^
+  python -m source.main --pages 10 --min-delay 0.8 --max-delay 1.6 ^
     --out data/processed/hse_10p.csv --db data/processed/hse_10p.sqlite
 
 Ejemplo 3 — Scraping completo (hasta última página):
-  python -m src.main --all --min-delay 1.2 --max-delay 2.5 ^
+  python -m source.main --all --min-delay 1.2 --max-delay 2.5 ^
     --out data/processed/hse_full.csv --db data/processed/hse_full.sqlite
 
 -------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ Cómo exportar manualmente lo acumulado:
   (Se puede ejecutar de nuevo el scraper para que exporte al final o exportar con un script propio.)
 
 Reanudar manualmente:
-  python -m src.main --all --start-page 97 --min-delay 1.2 --max-delay 2.5 ^
+  python -m source.main --all --start-page 97 --min-delay 1.2 --max-delay 2.5 ^
     --out data/processed/hse_full.csv --db data/processed/hse_full.sqlite
 
 -------------------------------------------------------------------------------

@@ -225,3 +225,8 @@ Los archivos son:
 **NOTA**: Existen dos archivos de ejemplo con data visualizable:
 - `hse_sample.csv`
 - `hse_sample.sqlite`
+
+Adicionalmente, se adjunta el enlace del DOI de Zenodo:
+
+https://doi.org/10.5281/zenodo.19438807
+
