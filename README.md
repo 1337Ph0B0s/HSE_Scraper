@@ -29,10 +29,10 @@ Cada fila del listado enlaza a una ficha:
 ---
 
 ## 3. Estructura del proyecto
-Estructura estilo PEC/UOC (Opción 1):
+Estructura estilo PEC/UOC:
 
 ```text
-src/
+source/
   main.py
   __init__.py
   modules/
