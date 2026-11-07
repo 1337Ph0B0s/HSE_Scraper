@@ -1,4 +1,4 @@
-**Idioma:** [English](README.md) | Español
+**Idioma:** [English](README.md) | Español | [Nederlands](README.nl.md)
 
 # Práctica 1 (M2.851 Tipología y ciclo de vida de los datos) — Web Scraping + Dataset (HSE Notices)
 
