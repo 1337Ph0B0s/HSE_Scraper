@@ -2,7 +2,7 @@
 
 **A resumable Python ETL pipeline for collecting, structuring, and exporting public enforcement notices from the UK's Health and Safety Executive (HSE).**
 
-**Language:** English | [Español](README.es.md)
+**Language:** English | [Español](README.es.md) | [Nederlands](README.nl.md)
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
 [![License: GPL v3](https://img.shields.io/badge/Code%20License-GPLv3-blue)](LICENSE)
@@ -72,6 +72,7 @@ requirements-dev.txt
 LICENSE
 README.md
 README.es.md
+README.nl.md
 ```
 
 The detail parser reads labeled HTML tables and preserves text fields such as `description` and `address`. The pipeline coordinates listing/detail extraction, while `SQLiteStore` handles durable storage, checkpoints, and export.
